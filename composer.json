@@ -1,0 +1,29 @@
+{
+    "name": "bonweb/laradmin",
+    "description": "",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thodoris Ntounas",
+            "email": "dounasth@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*",
+        "cartalyst/sentry": "2.1.*",
+        "atticmedia/anvard": "dev-master"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations",
+            "src/controllers",
+            "src/models",
+            "src/helpers"
+        ],
+        "psr-0": {
+            "Bonweb\\Laradmin\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
