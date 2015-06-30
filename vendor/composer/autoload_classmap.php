@@ -8,9 +8,11 @@ $baseDir = dirname($vendorDir);
 return array(
     'AlertMessage' => $baseDir . '/src/helpers/AlertMessage.php',
     'Bonweb\\Laradmin\\LaradminServiceProvider' => $baseDir . '/src/Bonweb/Laradmin/LaradminServiceProvider.php',
+    'Bonweb\\Laradmin\\Photo' => $baseDir . '/src/models/Photo.php',
     'Bonweb\\Laradmin\\Util' => $baseDir . '/src/helpers/Util.php',
     'Bonweb\\Laradmin\\UtilLang' => $baseDir . '/src/helpers/UtilLang.php',
     'CreatePermissionsTable' => $baseDir . '/src/migrations/2014_10_04_072346_create_permissions_table.php',
+    'CreatePhotosTable' => $baseDir . '/src/migrations/2015_05_22_085844_create_photos_table.php',
     'CreateSettingsTable' => $baseDir . '/src/migrations/2014_11_07_141313_create_settings_table.php',
     'CreateUsersTable' => $baseDir . '/src/migrations/2014_09_27_112958_create_users_table.php',
     'GreekSlugGenerator' => $baseDir . '/src/helpers/GreekSlugGenerator.php',

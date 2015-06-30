@@ -11,6 +11,10 @@
   |
  */
 
+Blade::extend(function($value) {
+    return preg_replace('/\@var(.+)/', '<?php ${1}; ?>', $value);
+});
+
 App::before(function($request) {
     if (Request::get('open') == 'y') {
         Session::put('open', 'y');
