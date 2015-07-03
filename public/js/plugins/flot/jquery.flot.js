@@ -1044,7 +1044,7 @@ Licensed under the MIT license.
                     s.lines.zero = !!s.lines.fill;
                 }
 
-                // setup axes
+                // install axes
                 s.xaxis = getOrCreateAxis(xaxes, axisNumber(s, "x"));
                 s.yaxis = getOrCreateAxis(yaxes, axisNumber(s, "y"));
             }

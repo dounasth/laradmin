@@ -16,7 +16,7 @@ class CreateUsersGroupsTable extends Migration {
 		{
 			$table->integer('user_id');
 			$table->integer('group_id');
-			$table->primary(['user_id','group_id'], 'primary');
+			$table->primary(['user_id','group_id']);
 		});
 	}
 

@@ -15,10 +15,10 @@ class CreatePhotosTable extends Migration {
 		Schema::create('photos', function(Blueprint $table)
 		{
 			$table->integer('id', true);
-			$table->text('path')->index();
-			$table->text('link_type');
+			$table->string('path', 255)->index();
+			$table->string('link_type');
 			$table->integer('imageable_id')->index();
-			$table->text('imageable_type')->index();
+			$table->string('imageable_type', 255)->index();
 			$table->decimal('created_at', 10, 0);
 			$table->decimal('updated_at', 10, 0);
 			$table->decimal('deleted_at', 10, 0)->nullable();

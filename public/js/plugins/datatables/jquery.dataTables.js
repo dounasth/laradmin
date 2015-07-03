@@ -574,7 +574,7 @@
 			
 			/* Gather in the TD elements of the Table - note that this is basically the same as
 			 * fnGetTdNodes, but that function takes account of hidden columns, which we haven't yet
-			 * setup!
+			 * install!
 			 */
 			nTrs = _fnGetTrNodes( oSettings );
 			nTds = [];

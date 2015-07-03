@@ -13,7 +13,14 @@
 
 Route::pattern('id', '[0-9]+');
 
-Route::any('laradminit', array('as' => 'laradmin-init', 'uses' => 'LaradminInitController@initialize'));
+Route::get('/test', array('as' => 'test', 'uses' => 'LaradminInitController@main'));
+
+Route::group(array('before' => 'is.installed', 'after' => '', 'prefix' => 'install'), function() {
+    Route::get('/', array('as' => 'install-main', 'uses' => 'LaradminInitController@main'));
+    Route::post('/run', array('as' => 'install-run', 'uses' => 'LaradminInitController@runMigration'));
+});
+
+
 
 Route::any('login', array('as' => 'login', 'uses' => 'LaradminUserController@login'));
 Route::any('register', array('as' => 'register', 'uses' => 'LaradminUserController@register'));

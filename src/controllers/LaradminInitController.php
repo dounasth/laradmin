@@ -2,39 +2,50 @@
 
 class LaradminInitController extends \LaradminBaseController {
 
-    public function initialize()
+    public function main() {
+        return View::make('laradmin::install.main');
+    }
+    public function runMigration()
     {
-//        $this->command->info('User table seeded!');
-        Sentry::createGroup(array(
-            'name'        => 'Administrator',
-            'permissions' => array(
-                'user.view' => 1,
-                'user.create' => 1,
-                'user.delete' => 1,
-                'user.update' => 1,
-            ),
-        ));
-        Sentry::createGroup(array(
-            'name'        => 'Moderator',
-            'permissions' => array(
-                'user.view' => 1,
-                'user.update' => 1,
-            ),
-        ));
-        Sentry::createGroup(array(
-            'name'        => 'Editor',
-            'permissions' => array(
-                'user_can_register_for' => 1,
-                'user.create' => 1,
-                'user.update' => 1,
-            ),
-        ));
-        Sentry::createGroup(array(
-            'name'        => 'Simple User',
-            'permissions' => array(
-                'user_can_register_for' => 1,
-            ),
-        ));
+        Artisan::call('asset:publish', ['package'=>'bonweb/laradmin']);
+
+        Artisan::call('config:publish', ['package'=>'bonweb/laradmin']);
+        Artisan::call('config:publish', ['package'=>'atticmedia/anvard']);
+        Artisan::call('config:publish', ['package'=>'cartalyst/sentry']);
+
+        Artisan::call('migrate', [
+            '--package'=>'bonweb/laradmin',
+            '--force' => true,
+        ]);
+        $seeder = new Bonweb\Laradmin\DatabaseSeeder();
+        $seeder->run();
+
+        try
+        {
+            $data = Input::get('user');
+            // Let's register a user.
+            $user = Sentry::register($data, false);
+            $usergroup = Sentry::findGroupByName('Administrator');
+            $user->addGroup($usergroup);
+
+            $user = Sentry::findUserById($user->getId());
+
+            $admin = User::findOrFail($user->getId());
+            $admin->activated = 1;
+            $admin->save();
+        }
+        catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
+        {
+            $message = AlertMessage::make(AlertMessage::TYPE_ERROR, 'Login field is required.');
+            return Redirect::route('register')->withMessage($message);
+        }
+        catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
+        {
+            $message = AlertMessage::make(AlertMessage::TYPE_ERROR, 'Password field is required.');
+            return Redirect::route('register')->withMessage($message);
+        }
+
+        return Redirect::route('login')->withMessage('Laradmin install is complete. Login with your admin account now');
     }
 
 }

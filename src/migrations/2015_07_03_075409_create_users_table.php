@@ -15,18 +15,18 @@ class CreateUsersTable extends Migration {
 		Schema::create('users', function(Blueprint $table)
 		{
 			$table->integer('id', true);
-			$table->text('email')->unique();
-			$table->text('password');
-			$table->text('permissions')->nullable();
+			$table->string('email')->unique();
+			$table->string('password');
+			$table->string('permissions')->nullable();
 			$table->integer('activated')->default(0);
-			$table->text('activation_code')->nullable()->index();
+			$table->string('activation_code')->nullable()->index();
 			$table->decimal('activated_at', 10, 0)->nullable();
 			$table->decimal('last_login', 10, 0)->nullable();
-			$table->text('persist_code')->nullable();
-			$table->text('reset_password_code')->nullable()->index();
-			$table->text('remember_token')->nullable();
-			$table->text('first_name')->nullable();
-			$table->text('last_name')->nullable();
+			$table->string('persist_code')->nullable();
+			$table->string('reset_password_code')->nullable()->index();
+			$table->string('remember_token')->nullable();
+			$table->string('first_name')->nullable();
+			$table->string('last_name')->nullable();
 			$table->decimal('created_at', 10, 0);
 			$table->decimal('updated_at', 10, 0);
 		});

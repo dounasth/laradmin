@@ -55,7 +55,7 @@
                 <li><!-- start message -->
                     <a href="#">
                         <div class="pull-left">
-                            <img src="{{ isset(Auth::user()->profiles->get('0')->photoURL) ? Auth::user()->profiles->get('0')->photoURL : Config::get('laradmin::general.asset_path').'/img/avatar3.png' }}" class="img-circle" alt="User Image"/>
+                            <img src="{{ Config::get('laradmin::general.asset_path').'/img/avatar3.png' }}" class="img-circle" alt="User Image"/>
                         </div>
                         <h4>
                             Support Team
@@ -238,7 +238,7 @@
     <ul class="dropdown-menu">
         <!-- User image -->
         <li class="user-header bg-light-blue">
-            <img src="{{ isset(Auth::user()->profiles->get('0')->photoURL) ? Auth::user()->profiles->get('0')->photoURL : Config::get('laradmin::general.asset_path').'/img/avatar3.png' }}" class="img-circle" alt="User Image" />
+            <img src="{{ Config::get('laradmin::general.asset_path').'/img/avatar3.png' }}" class="img-circle" alt="User Image" />
             <p>
                 {{Auth::user()->name}} - {{Auth::user()->email}}
                 <small>Member since {{Auth::user()->created_at}}</small>
@@ -281,7 +281,7 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{ isset(Auth::user()->profiles->get('0')->photoURL) ? Auth::user()->profiles->get('0')->photoURL : Config::get('laradmin::general.asset_path').'/img/avatar3.png' }}" class="img-circle" alt="User Image" />
+                    <img src="{{ Config::get('laradmin::general.asset_path').'/img/avatar3.png' }}" class="img-circle" alt="User Image" />
                 </div>
                 <div class="pull-left info">
                     <p>Hello, {{Auth::user()->first_name}}</p>

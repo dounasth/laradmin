@@ -187,17 +187,17 @@ class LaradminUserController extends \LaradminBaseController {
             catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
             {
                 $message = AlertMessage::make(AlertMessage::TYPE_ERROR, 'Login field is required.');
-                return Redirect::route('activate')->withMessage($message);
+                return Redirect::route('register')->withMessage($message);
             }
             catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
             {
                 $message = AlertMessage::make(AlertMessage::TYPE_ERROR, 'Password field is required.');
-                return Redirect::route('activate')->withMessage($message);
+                return Redirect::route('register')->withMessage($message);
             }
             catch (Cartalyst\Sentry\Users\UserExistsException $e)
             {
                 $message = AlertMessage::make(AlertMessage::TYPE_ERROR, 'User with this login already exists.');
-                return Redirect::route('activate')->withMessage($message);
+                return Redirect::route('register')->withMessage($message);
             }
             return Redirect::route('activate');
         }
@@ -413,7 +413,7 @@ class LaradminUserController extends \LaradminBaseController {
 
     public function logout() {
         Auth::logout();
-        return Redirect::home();
+        return Redirect::to('/');
     }
 
 }
