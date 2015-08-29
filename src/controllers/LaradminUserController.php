@@ -260,6 +260,7 @@ class LaradminUserController extends \LaradminBaseController {
     }
 
     public function login() {
+
         if (Request::isMethod('post')) {
             try
             {

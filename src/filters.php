@@ -16,12 +16,12 @@ Blade::extend(function($value) {
 });
 
 App::before(function($request) {
-//    if (Request::get('open') == 'y') {
-//        Session::put('open', 'y');
-//    }
-//    if ( Session::get('open', 'n') != 'y' ) {
-//        exit;
-//    }
+    if (Request::get('open') == 'y') {
+        Session::put('open', 'y');
+    }
+    if ( Session::get('open', 'n') != 'y' ) {
+        exit;
+    }
 //    Config::set('app.url', 'http://'.Config::get('laradmin::general.domain'));
 });
 

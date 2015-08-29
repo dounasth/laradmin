@@ -1,6 +1,7 @@
 <?php
 
 Event::listen('admin.top-left-menu', function(){
+    if ( Route::getCurrentRoute()->getPrefix() == 'admin' ) {
     return array(
         'settings' => array(
             'label' => '',
@@ -34,9 +35,12 @@ Event::listen('admin.top-left-menu', function(){
             ),
         ),
     );
+    }
+    else return [];
 }, 1000000);
 
 Event::listen('admin.left-menu', function(){
+    if ( Route::getCurrentRoute()->getPrefix() == 'admin' ) {
     return array(
         'dashboard' => array(
             'label' => 'Dashboard',
@@ -44,8 +48,27 @@ Event::listen('admin.left-menu', function(){
             'icon' => 'fa-dashboard',
         ),
     );
+    }
+    else return [];
 }, 1000000);
 Event::listen('admin.left-menu', function(){
+    if ( Route::getCurrentRoute()->getPrefix() == 'admin' ) {
+
+    $dbsubmenu = array();
+    foreach (Config::get('database.connections') as $name => $db) {
+        if ($db['driver'] == 'sqlite') {
+            $href = "/adminer.php?sqlite=&username=&db={$db['database']}";
+        }
+        elseif ($db['driver'] == 'mysql') {
+            $href = "/adminer.php?server={$db['host']}&username={$db['username']}&db={$db['database']}&password={$db['password']}";
+        }
+        $dbsubmenu['db-'.$name] = array(
+            'label' => $name,
+            'href' => Config::get('app.url') . $href,
+            'icon' => 'fa-list',
+        );
+    }
+
     return array(
         'settings' => array(
             'label' => 'Settings',
@@ -108,10 +131,24 @@ Event::listen('admin.left-menu', function(){
                 ),
             ),
         ),
+        'tags' => array(
+            'label' => 'Tags',
+            'href' => route('tags'),
+            'icon' => 'fa-list',
+        ),
+        'databases' => array(
+            'label' => 'Databases',
+            'href' => '#',
+            'icon' => 'fa-list',
+            'submenu' => $dbsubmenu
+        ),
     );
+    }
+    else return [];
 }, 100);
 
 Event::listen('admin.dashboard.widgets', function(){
+    if ( Route::getCurrentRoute()->getPrefix() == 'admin' ) {
     $widget = new ViewWidget('welcome', Widget::TYPE_VIEW);
     $widget->view = 'laradmin::widgets.dash-welcome';
     $widget->wrapClass = 'col-lg-3 col-xs-6';
@@ -119,9 +156,12 @@ Event::listen('admin.dashboard.widgets', function(){
         'user' => Auth::user()
     );
     return $widget;
+    }
+    else return [];
 }, 1000000);
 
 Event::listen('admin.dashboard.widgets', function(){
+    if ( Route::getCurrentRoute()->getPrefix() == 'admin' ) {
     $widget = new ViewWidget('users-count', Widget::TYPE_VIEW);
     $widget->view = 'laradmin::widgets.dash-users-count';
     $widget->wrapClass = 'col-lg-3 col-xs-6';
@@ -129,22 +169,30 @@ Event::listen('admin.dashboard.widgets', function(){
         'users_count' => User::count()
     );
     return $widget;
+    }
+    else return [];
 }, 1000000);
 
 Event::listen('admin.dashboard.widgets', function(){
+    if ( Route::getCurrentRoute()->getPrefix() == 'admin' ) {
     $widget = new ViewWidget('analytics-bounce-rate', Widget::TYPE_VIEW);
     $widget->view = 'laradmin::widgets.dash-analytics-bounce-rate';
     $widget->wrapClass = 'col-lg-3 col-xs-6';
     $widget->data = array();
     return $widget;
+    }
+    else return [];
 }, 1000000);
 
 Event::listen('admin.dashboard.widgets', function() {
+    if ( Route::getCurrentRoute()->getPrefix() == 'admin' ) {
     $widget = new ViewWidget('analytics-visitors', Widget::TYPE_VIEW);
     $widget->view = 'laradmin::widgets.dash-analytics-visitors';
     $widget->wrapClass = 'col-lg-3 col-xs-6';
     $widget->data = array();
     return $widget;
+    }
+    else return [];
 }, 1000000);
 
 /*Event::listen('admin.dashboard.widgets', function(){
@@ -170,9 +218,12 @@ Event::listen('admin.dashboard.widgets', function(){
 }, 1000000);*/
 
 Event::listen('admin.translations', function() {
+    if ( Route::getCurrentRoute()->getPrefix() == 'admin' ) {
     return array(
         'prefix' => 'laradmin',
         'path' => dirname(__FILE__),
     );
+    }
+    else return [];
 }, 1000000);
 

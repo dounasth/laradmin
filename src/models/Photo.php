@@ -16,4 +16,11 @@ class Photo extends \Eloquent {
         return $this->morphTo();
     }
 
+    public function httpPath() {
+        if (strrpos($this->path, 'http://', -strlen($this->path)) !== FALSE) {
+            return $this->path;
+        }
+        else return \Config::get('app.url').'/public/'.$this->path;
+    }
+
 }

@@ -23,7 +23,9 @@
         "barryvdh/laravel-ide-helper": "~1.11",
         "barryvdh/laravel-debugbar": "~1.8",
         "doctrine/dbal": "~2.3",
-        "barryvdh/laravel-elfinder": "0.2"
+        "barryvdh/laravel-elfinder": "0.2",
+
+        "yajra/laravel-datatables-oracle":"~3.0"
     },
     "autoload": {
         "classmap": [

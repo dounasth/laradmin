@@ -11,14 +11,15 @@ class LaradminSettingsController extends \LaradminBaseController {
         $file = Input::get('configfile');
         list($package, $file) = explode('::', $file);
         $settings = Input::get('settings');
+
         $content = '<?php return '.var_export($settings, true).'; ?>';
 
         $config_file = Config::get($package.'::general.config_path').'/'.$file.'.php';
+
         if (file_exists($config_file)) {
             file_put_contents($config_file, $content);
         }
-        exit;
-        return View::make('laradmin::settings.manage')->withSettings($settings)->withConfigfile($config_file);
+        return Redirect::route('settings', [Input::get('configfile')]);
     }
 
 }

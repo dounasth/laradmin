@@ -19,12 +19,20 @@ for config: <b>{{ $configfile }}</b>
 @section('scripts')
 <script type="text/javascript" charset="utf-8">
     jQuery(document).ready(function(){
+
         jQuery('.add-parameter').click(function(e){
             e.preventDefault();
             var newParam = jQuery('.new-parameter-name').val();
             var row = jQuery('.parameter-row:last').clone(true);
             row.find('label').attr('for', newParam).text(newParam);
             row.find('input').val('').attr('id', newParam).attr('name', 'settings['+newParam+']');
+            jQuery('.parameter-rows .box-footer').before(row);
+            return false;
+        });
+
+        jQuery('.delete-row').click(function(e){
+            e.preventDefault();
+            jQuery(this).closest('.parameter-row').remove();
             return false;
         });
     });
@@ -51,7 +59,7 @@ for config: <b>{{ $configfile }}</b>
 
 <div class="box box-primary">
     <div class="box-body table-responsive">
-        <form role="form" method="post" action="{{ route('settings_save') }}">
+        <form role="form" method="post" action="{{ route('settings_save') }}" class="parameter-rows">
             <input type="hidden" name="configfile" value="{{$configfile}}"/>
             @foreach ($settings as $name => $value)
             <div class="form-group parameter-row">
@@ -60,7 +68,12 @@ for config: <b>{{ $configfile }}</b>
                         <label for="{{ $name }}">{{ $name }}</label>
                     </div>
                     <div class="col-lg-9 col-xs-12">
-                        <input type="text" id="{{ $name }}" class="form-control" name="settings[{{ $name }}]" value="{{ $value }}">
+                        <div class="input-group input-group-sm">
+                            <input type="text" id="{{ $name }}" class="form-control" name="settings[{{ $name }}]" value="{{ $value }}">
+                            <span class="input-group-btn">
+                                <button class="btn btn-danger btn-flat delete-row" type="button">Delete</button>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

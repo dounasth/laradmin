@@ -43,12 +43,15 @@ class LaradminServiceProvider extends ServiceProvider
         $this->app->register('Cviebrock\EloquentSluggable\SluggableServiceProvider');
         $this->app->register('Lanz\Commentable\CommentableServiceProvider');
         $this->app->register('Conner\Tagging\TaggingServiceProvider');
+        $this->app->register('Mmanos\Metable\MetableServiceProvider');
+        $this->app->register('yajra\Datatables\DatatablesServiceProvider');
         /*
          * Create aliases for the dependency.
          */
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
         $loader->alias('Sentry', 'Cartalyst\Sentry\Facades\Laravel\Sentry');
         $loader->alias('Debugbar', 'Barryvdh\Debugbar\Facade');
+        $loader->alias('Datatables', 'yajra\Datatables\Facades\Datatables');
     }
 
     /**

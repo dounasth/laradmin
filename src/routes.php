@@ -13,14 +13,15 @@
 
 Route::pattern('id', '[0-9]+');
 
-Route::get('/test', array('as' => 'test', 'uses' => 'LaradminInitController@main'));
+Route::get('/', array('as'=>'home', function()
+{
+    return View::make('laradmin::site.home');
+}));
 
 Route::group(array('before' => 'is.installed', 'after' => '', 'prefix' => 'install'), function() {
     Route::get('/', array('as' => 'install-main', 'uses' => 'LaradminInitController@main'));
     Route::post('/run', array('as' => 'install-run', 'uses' => 'LaradminInitController@runMigration'));
 });
-
-
 
 Route::any('login', array('as' => 'login', 'uses' => 'LaradminUserController@login'));
 Route::any('register', array('as' => 'register', 'uses' => 'LaradminUserController@register'));
@@ -47,6 +48,8 @@ Route::group(array('before' => 'auth|auth.admin|init.admin', 'after' => '', 'pre
 
     Route::get('permissions/list', array('as' => 'permissions', 'uses' => 'LaradminUserController@managePermissions'));
 
+    Route::get('tags/list', array('as' => 'tags', 'uses' => 'LaradminDashboardController@tags'));
+
     Route::get('settings/{config_file}', array('as' => 'settings', 'uses' => 'LaradminSettingsController@manageSettings'));
     Route::any('settings/save', array('as' => 'settings_save', 'uses' => 'LaradminSettingsController@saveSettings'));
 
@@ -60,3 +63,4 @@ Route::group(array('before' => 'auth|auth.admin|init.admin', 'after' => '', 'pre
     Route::any('languages/translations/delete/{path}/{file}/{key}', array('as' => 'translations_delete', 'uses' => 'LaradminLanguagesController@deleteTranslation'));
 });
 
+Route::any('json/tags', array('as' => 'json.tags', 'uses' => 'LaradminDashboardController@tagsJson'));
