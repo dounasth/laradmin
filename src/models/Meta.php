@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletingTrait;
 class Meta extends Eloquent
 {
 	use SoftDeletingTrait;
-
+	
 	/**
 	 * The table name for t his model.
 	 *
