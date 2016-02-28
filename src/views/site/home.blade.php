@@ -7,6 +7,9 @@
 @section('page-subtitle')
 @stop
 
+@section('styles')
+@stop
+
 @section('content')
 
 
@@ -18,7 +21,7 @@
         <div class=" image-show-case-wrapper center-block relative col-lg-12">
             <div id="imageShowCase" class="owl-carousel owl-theme">
                 @foreach ($slides as $slide)
-                <div class="product-slide">
+                <div class="product-slide"> 
                     <div class="box-content-overly box-content-overly-white">
                         <div class="box-text-table">
                             <div class="box-text-cell ">
@@ -79,7 +82,7 @@
 </div>
 
 
-<div class="container main-container">
+<div class="container">
 
     <div class="row featuredPostContainer style2">
         <h3 class="section-title style2 text-center"><span>ΝΕΑ ΠΑΠΟΥΤΣΙΑ</span></h3>
@@ -117,7 +120,7 @@
 </div>
 @endif
 
-<div class="container main-container">
+<div class="container ">
 
 @if (false)
 <div class="morePost row featuredPostContainer style2 globalPaddingTop ">

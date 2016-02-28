@@ -1,68 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('page-title')</title>
-    @yield('meta')
-
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ Config::get('laradmin::general.theme_path') }}/assets/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ Config::get('laradmin::general.theme_path') }}/assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ Config::get('laradmin::general.theme_path') }}/assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="{{ Config::get('laradmin::general.theme_path') }}/ico/apple-touch-icon-57-precomposed.png">
     <link rel="shortcut icon" href="{{ Config::get('app.url') }}/images/favicon.ico">
-    <link href="{{ Config::get('laradmin::general.theme_path') }}/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link id="pagestyle" rel="stylesheet" type="text/css" href="{{ Config::get('laradmin::general.theme_path') }}/assets/css/skin-{{Config::get('laradmin::site.skin')}}.css">
-    <link href="{{ Config::get('laradmin::general.theme_path') }}/assets/plugins/swiper-master/css/swiper.min.css" rel="stylesheet">
-    <link href="{{ Config::get('laradmin::general.theme_path') }}/assets/css/style.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-    <script>
-        paceOptions = {
-            elements: true
-        };
-    </script>
-    @yield('styles')
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-57875530-2', 'auto');
-        ga('send', 'pageview');
-
-    </script>
+    @yield('meta')
 </head>
-<body>
+<body style="display: none;">
 <div class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
 
-<div class="container">
-<div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only"> </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span></button>
-    <a class="navbar-brand " href="{{ Config::get('app.url') }}"> <img src="{{ Config::get('app.url') }}/images/logo.png" alt="{{Config::get('laradmin::site.name')}}"> </a>
-</div>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only"> </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span></button>
+            <a class="navbar-brand " href="{{ Config::get('app.url') }}"> <img src="{{ Config::get('app.url') }}/images/logo.png" alt="{{Config::get('laradmin::site.name')}}"> </a>
+        </div>
 
-<div class="navbar-collapse collapse">
-<ul class="nav navbar-nav">
-    @var $tree = Bonweb\Laracart\Category::defaultOrder()->get()->toTree();
-    @include('laracart::site.menu', ['tree'=>$tree])
-    <li>
-        <a href="{{route('site.coupons.list')}}">
-            <span>Κουπονια</span>
-        </a>
-    </li>
-</ul>
-</ul>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                @var $tree = Bonweb\Laracart\Category::defaultOrder()->get()->toTree();
+                @include('laracart::site.menu', ['tree'=>$tree])
+                <li>
+                    <a href="{{route('site.coupons.list')}}">
+                        <span>Κουπονια</span>
+                    </a>
+                </li>
+            </ul>
+            </ul>
 
-<div class="nav navbar-nav navbar-right hidden-xs">
-</div>
+            <div class="nav navbar-nav navbar-right hidden-xs">
+            </div>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
 </div>
 
@@ -125,7 +100,6 @@
                                     </div>
                                 </form>
                             </div>
-                            <script type='text/javascript' src="{{ Config::get('laradmin::general.theme_path') }}/assets/js/mc-validate.js"></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
                             <!--End mc_embed_signup-->
                         </li>
                     </ul>
@@ -143,14 +117,22 @@
     </div>
 
 </footer>
-
-
+<script type='text/javascript' src="{{ Config::get('laradmin::general.theme_path') }}/assets/js/mc-validate.js"></script>
+<script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+<link href="{{ Config::get('laradmin::general.theme_path') }}/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link id="pagestyle" rel="stylesheet" type="text/css" href="{{ Config::get('laradmin::general.theme_path') }}/assets/css/skin-{{Config::get('laradmin::site.skin')}}.css">
+<link href="{{ Config::get('laradmin::general.theme_path') }}/assets/plugins/swiper-master/css/swiper.min.css" rel="stylesheet">
+<link href="{{ Config::get('laradmin::general.theme_path') }}/assets/css/style.css" rel="stylesheet">
+@yield('styles')
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+<script>paceOptions = {elements: true};</script>
 <script type="text/javascript" src="{{ Config::get('laradmin::general.theme_path') }}/assets/js/jquery/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="{{ Config::get('laradmin::general.theme_path') }}/assets/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="{{ Config::get('laradmin::general.theme_path') }}/assets/plugins/swiper-master/js/swiper.jquery.min.js"></script>
 <script type="text/javascript" charset="utf-8">
-
-
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         nextButton: '.nextControl',
@@ -163,8 +145,9 @@
         spaceBetween: 0,
         freeMode: true
     });
-
-
+    jQuery('document').ready(function(){
+        jQuery('body').css('display', 'inherit');
+    });
 </script>
 <script type="text/javascript" src="{{ Config::get('laradmin::general.theme_path') }}/assets/js/pace.min.js"></script>
 <script type="text/javascript" src="{{ Config::get('laradmin::general.theme_path') }}/assets/js/jquery.cycle2.min.js"></script>
@@ -174,6 +157,8 @@
 <script type="text/javascript" src="{{ Config::get('laradmin::general.theme_path') }}/assets/js/owl.carousel.min.js"></script>
 <script type="text/javascript" src="{{ Config::get('laradmin::general.theme_path') }}/assets/js/bootstrap.touchspin.js"></script>
 <script type="text/javascript" src="{{ Config::get('laradmin::general.theme_path') }}/assets/js/script.js"></script>
+<script type="text/javascript">window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"Got it!","learnMore":"More info","link":null,"theme":"light-floating"};</script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
 @yield('scripts')
 </body>
 </html>
