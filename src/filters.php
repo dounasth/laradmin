@@ -11,44 +11,58 @@
   |
  */
 
+Route::filter('cache', function($route, $request, $response, $age=0){
+//    if (Config::get("laradmin::site.is-open")) {
+//        $response->setTtl($age);
+//    }
+});
+
 Blade::extend(function($value) {
     return preg_replace('/\@var(.+)/', '<?php ${1}; ?>', $value);
 });
 
 App::before(function($request) {
-    if (Request::get('open') == 'y') {
-        Session::put('open', 'y');
-    }
-    if ( Session::get('open', 'n') != 'y' ) {
-        exit;
-    }
-//    Config::set('app.url', 'http://'.Config::get('laradmin::general.domain'));
-});
 
-
-App::after(function($request, $response) {
-    //
-});
-
-/*
-  |--------------------------------------------------------------------------
-  | Authentication Filters
-  |--------------------------------------------------------------------------
-  |
-  | The following filters are used to verify that the user of the current
-  | session is logged into this application. The "basic" filter easily
-  | integrates HTTP Basic authentication for quick, simple checking.
-  |
- */
-
-App::before(function($request)
-{
     App::setLocale(Config::get('laradmin::langs.default_site'));
+
+    if (!Config::get("laradmin::site.is-open")) {
+        //  Check if open=yes
+        if (Request::get('open') == 'yes') {
+            Session::put('open', 'yes');
+        }
+        if ( Session::get('open', 'no') != 'yes' ) {
+            exit;
+        }
+    }
+
+    //  Check if debug is enabled
+    if (Request::get('debug') == 'on') {
+        Session::put('debug', true);
+    }
+    elseif (Request::get('debug') == 'off') {
+        Session::put('debug', false);
+    }
+    //  Apply debug status
+    if (Session::get('debug', false) == true) {
+        \Debugbar::enable();
+        Config::set('app.debug', true);
+    }
+    elseif (Session::get('debug', false) == false) {
+        \Debugbar::disable();
+        Config::set('app.debug', false);
+    }
+
+    //  Clean cache if url param is set
+    if (Request::get('cc') == 'yes') {
+        //Artisan::call('cache:clear', array('--force'=>true));
+        Cache::flush();
+        DebugBar::addMessage('cleaned cache');
+    }
 });
 
 App::after(function($request, $response)
 {
-    //
+
 });
 
 Route::filter('auth', function() {

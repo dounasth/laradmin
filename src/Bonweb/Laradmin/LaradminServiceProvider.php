@@ -20,10 +20,10 @@ class LaradminServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->package('bonweb/laradmin');
-        include __DIR__ . '/../../helpers/fn.commons.php';
-        include __DIR__ . '/../../events.php';
-        include __DIR__ . '/../../filters.php';
-        include __DIR__ . '/../../routes.php';
+        include_once __DIR__ . '/../../helpers/fn.commons.php';
+        include_once __DIR__ . '/../../events.php';
+        include_once __DIR__ . '/../../filters.php';
+        include_once __DIR__ . '/../../routes.php';
     }
 
     /**
@@ -45,6 +45,8 @@ class LaradminServiceProvider extends ServiceProvider
         $this->app->register('Conner\Tagging\TaggingServiceProvider');
         $this->app->register('Mmanos\Metable\MetableServiceProvider');
         $this->app->register('yajra\Datatables\DatatablesServiceProvider');
+        $this->app->register('Watson\Sitemap\SitemapServiceProvider');
+//        $this->app->register('Barryvdh\HttpCache\ServiceProvider');
         /*
          * Create aliases for the dependency.
          */
@@ -52,6 +54,7 @@ class LaradminServiceProvider extends ServiceProvider
         $loader->alias('Sentry', 'Cartalyst\Sentry\Facades\Laravel\Sentry');
         $loader->alias('Debugbar', 'Barryvdh\Debugbar\Facade');
         $loader->alias('Datatables', 'yajra\Datatables\Facades\Datatables');
+        $loader->alias('Sitemap', 'Watson\Sitemap\Facades\Sitemap');
     }
 
     /**

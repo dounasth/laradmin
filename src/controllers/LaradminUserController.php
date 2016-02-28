@@ -180,7 +180,7 @@ class LaradminUserController extends \LaradminBaseController {
                 $user = Sentry::findUserById($user->getId());
                 Mail::send('laradmin::emails.register', array('user' => $user), function($message) use ($user)
                 {
-                    $message->from(Config::get('mail.from.address'), Config::get('mail.from.name'));
+                    $message->from(Config::get('laradmin::general.mail.from.address'), Config::get('laradmin::general.mail.from.name'));
                     $message->to($user->email, "{$user->last_name} {$user->first_name}")->subject('Welcome to My Laravel app!');
                 });
             }
@@ -314,8 +314,11 @@ class LaradminUserController extends \LaradminBaseController {
 
         $socialButtons = '';
         if (class_exists( 'Atticmedia\Anvard\Anvard' )) {
-            $request = Request::create(Config::get('anvard::routes.index'), 'GET');
-            $socialButtons = Route::dispatch($request)->getContent();
+//            $request = Request::create(Config::get('anvard::routes.index'), 'GET');
+//            $socialButtons = Route::dispatch($request)->getContent();
+            $anvard = App::make('anvard');
+            $providers = $anvard->getProviders();
+            $socialButtons = View::make('laradmin::social-buttons', compact('providers'))->render();
         }
 
         return View::make('laradmin::login')->with('socialButtons', $socialButtons);

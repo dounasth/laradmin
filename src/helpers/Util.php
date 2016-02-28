@@ -16,4 +16,16 @@ class Util {
 //        }
     }
 
+    public static function pingEngines() {
+        if (\Config::get("laradmin::site.is-open")) {
+            $title = \Config::get("laradmin::misc.pingo.title");
+            $url = \Config::get("laradmin::misc.pingo.blogurl");
+            $rss = \Config::get("laradmin::misc.pingo.rssurl");
+            $pinger = new \Bonweb\Laradmin\Pinger();
+            $pinger->pingAll($title, $url, $rss);
+            return true;
+        }
+        else return false;
+    }
+
 }

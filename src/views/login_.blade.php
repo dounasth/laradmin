@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Reset your password</title>
+    <title>Login</title>
     <link href="{{Config::get('laradmin::general.asset_path')}}/css/login.css" rel="stylesheet" id="bootstrap-css">
     <style>
         @import url(//fonts.googleapis.com/css?family=Lato:700);
@@ -94,29 +94,35 @@
 </head>
 <body>
 {{AlertMessage::showMessages('laradmin::parts.messages-login')}}
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <h1 class="text-center login-title">Activate in to continue</h1>
+<div class="">
+    <div class="row-fluid">
+        <div class="col-sm-12 col-md-4">
+            <h1 class="text-center login-title">Sign in to continue</h1>
             <div class="account-wall">
                 <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                      alt="">
-                {{ Form::open(array('route' => 'do_reset_password', 'method' => 'post', 'class'=>'form-reset-pass')) }}
+                {{ Form::open(array('route' => 'login', 'method' => 'post', 'class'=>'form-signin')) }}
 
-                {{ Form::text('user', Input::get('user', ''), array('placeholder'=>'Email', 'class'=>'form-control', 'required'=>'', 'autofocus'=>'')); }}
+                    {{ Form::text('username', '', array('placeholder'=>'Username', 'class'=>'form-control', 'required'=>'', 'autofocus'=>'')); }}
 
-                {{ Form::text('code', Input::get('code', ''), array('placeholder'=>'Reset Code', 'class'=>'form-control', 'required'=>'')); }}
+                    {{ Form::password('password', array('placeholder'=>'Password', 'class'=>'form-control', 'required'=>'')); }}
 
-                {{ Form::text('newPassword', '', array('placeholder'=>'New Password', 'class'=>'form-control', 'required'=>'')); }}
-                {{ Form::text('newPassword_confirm', '', array('placeholder'=>'Confirm Password', 'class'=>'form-control', 'required'=>'')); }}
+                    {{ Form::submit('Sign in', array('class'=>'btn btn-lg btn-primary btn-block')) }}
 
-                {{ Form::submit('Activate', array('class'=>'btn btn-lg btn-primary btn-block')) }}
+                    <label class="checkbox pull-left">
+                        {{ Form::checkbox('remember-me', true); }}
+                        Remember me
+                    </label>
 
-                <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+                    <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
                 {{ Form::token() }}
                 {{ Form::close() }}
             </div>
             <a href="{{ route('register') }}" class="text-center new-account">Create an account </a>
+
+            @if ( class_exists( 'Atticmedia\Anvard\Anvard' ) )
+            {{$socialButtons}}
+            @endif
         </div>
     </div>
 </div>

@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>LaraPort | Dashboard</title>
+    <title>
+        @yield('page-title') | {{Config::get('laradmin::site.name')}}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
     <link href="{{ Config::get('laradmin::general.asset_path') }}/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -22,19 +23,19 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="skin-blue">
+<body class="skin-black">
 {{AlertMessage::showMessages('laradmin::parts.messages')}}
 <!-- header logo: style can be found in header.less -->
 <header class="header">
-<a href="{{route('admin')}}" class="logo">
+<a href="{{route('home')}}" target="_blank" class="logo">
     <!-- Add the class icon to your logo image or logo icon to add the margining -->
-    LaraPort
+    {{Config::get('laradmin::site.name')}}
 </a>
 <!-- Header Navbar: style can be found in header.less -->
 <nav class="navbar navbar-static-top" role="navigation">
 <!-- Sidebar toggle button-->
 <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
-    <span class="sr-only">Toggle navigation</span>
+    <span class="sr-only"></span>
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
@@ -233,7 +234,7 @@
 <li class="dropdown user user-menu">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="glyphicon glyphicon-user"></i>
-        <span>{{Auth::user()->email}}<i class="caret"></i></span>
+        <i class="caret"></i></span>
     </a>
     <ul class="dropdown-menu">
         <!-- User image -->
@@ -290,12 +291,12 @@
                 </div>
             </div>
             <!-- search form -->
-            <form action="#" method="get" class="sidebar-form">
+            <form action="{{route('admin_search')}}" method="get" class="sidebar-form">
                 <div class="input-group">
                     <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                            <span class="input-group-btn">
-                                <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-                            </span>
+                    <span class="input-group-btn">
+                        <button type='submit' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                    </span>
                 </div>
             </form>
             <!-- /.search form -->
@@ -311,7 +312,7 @@
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
+                        <span class="sr-only"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>

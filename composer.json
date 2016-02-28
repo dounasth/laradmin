@@ -25,7 +25,9 @@
         "doctrine/dbal": "~2.3",
         "barryvdh/laravel-elfinder": "0.2",
 
-        "yajra/laravel-datatables-oracle":"~3.0"
+        "yajra/laravel-datatables-oracle":"~3.0",
+        "watson/sitemap": "1.1.*",
+        "barryvdh/laravel-httpcache": "*"
     },
     "autoload": {
         "classmap": [

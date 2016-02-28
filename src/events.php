@@ -1,43 +1,11 @@
 <?php
 
-Event::listen('admin.top-left-menu', function(){
+/*Event::listen('admin.top-left-menu', function(){
     if ( Route::getCurrentRoute()->getPrefix() == 'admin' ) {
-    return array(
-        'settings' => array(
-            'label' => '',
-            'href' => '#',
-            'icon' => 'fa-cogs',
-            'submenu' => array(
-                'example1' => array(
-                    'label' => 'example1',
-                    'href' => '#',
-                    'icon' => 'fa-user',
-                    'submenu' => array(
-                        'example1' => array(
-                            'label' => 'example1',
-                            'href' => '#',
-                            'icon' => 'fa-user',
-                        ),
-                        'divider1' => 'divider',
-                        'example2' => array(
-                            'label' => 'example2',
-                            'href' => '#',
-                            'icon' => 'fa-user',
-                        ),
-                    ),
-                ),
-                'divider1' => 'divider',
-                'example2' => array(
-                    'label' => 'example2',
-                    'href' => '#',
-                    'icon' => 'fa-user',
-                ),
-            ),
-        ),
-    );
+    return array();
     }
     else return [];
-}, 1000000);
+}, 1000000);*/
 
 Event::listen('admin.left-menu', function(){
     if ( Route::getCurrentRoute()->getPrefix() == 'admin' ) {
@@ -54,22 +22,56 @@ Event::listen('admin.left-menu', function(){
 Event::listen('admin.left-menu', function(){
     if ( Route::getCurrentRoute()->getPrefix() == 'admin' ) {
 
-    $dbsubmenu = array();
-    foreach (Config::get('database.connections') as $name => $db) {
-        if ($db['driver'] == 'sqlite') {
-            $href = "/adminer.php?sqlite=&username=&db={$db['database']}";
-        }
-        elseif ($db['driver'] == 'mysql') {
-            $href = "/adminer.php?server={$db['host']}&username={$db['username']}&db={$db['database']}&password={$db['password']}";
-        }
-        $dbsubmenu['db-'.$name] = array(
-            'label' => $name,
-            'href' => Config::get('app.url') . $href,
-            'icon' => 'fa-list',
-        );
-    }
+//    $dbsubmenu = array();
+//    foreach (Config::get('database.connections') as $name => $db) {
+//        if ($db['driver'] == 'sqlite') {
+//            $href = "/adminer.php?sqlite=&username=&db={$db['database']}";
+//        }
+//        elseif ($db['driver'] == 'mysql') {
+//            $href = "/adminer.php?server={$db['host']}&username={$db['username']}&db={$db['database']}&password={$db['password']}";
+//        }
+//        $dbsubmenu['db-'.$name] = array(
+//            'label' => $name,
+//            'href' => Config::get('app.url') . $href,
+//            'icon' => 'fa-list',
+//        );
+//    }
 
     return array(
+        'pages' => array(
+            'label' => 'Pages',
+            'href' => '#',
+            'icon' => 'fa-cogs',
+            'submenu' => array(
+                'general' => array(
+                    'label' => 'List',
+                    'href' => route('pages.manage'),
+                    'icon' => 'fa-cogs',
+                ),
+                'misc' => array(
+                    'label' => 'Add',
+                    'href' => route('pages.manage', array('id'=>0)),
+                    'icon' => 'fa-cogs',
+                ),
+            ),
+        ),
+        'banners' => array(
+            'label' => 'Banners',
+            'href' => '#',
+            'icon' => 'fa-cogs',
+            'submenu' => array(
+                'general' => array(
+                    'label' => 'List',
+                    'href' => route('banners'),
+                    'icon' => 'fa-cogs',
+                ),
+                'misc' => array(
+                    'label' => 'Add',
+                    'href' => route('banners'),
+                    'icon' => 'fa-cogs',
+                ),
+            ),
+        ),
         'settings' => array(
             'label' => 'Settings',
             'href' => '#',
@@ -78,6 +80,11 @@ Event::listen('admin.left-menu', function(){
                 'general' => array(
                     'label' => 'General',
                     'href' => route('settings', array('laradmin::general')),
+                    'icon' => 'fa-user',
+                ),
+                'site' => array(
+                    'label' => 'Site',
+                    'href' => route('settings', array('laradmin::site')),
                     'icon' => 'fa-user',
                 ),
                 'misc' => array(
@@ -136,12 +143,12 @@ Event::listen('admin.left-menu', function(){
             'href' => route('tags'),
             'icon' => 'fa-list',
         ),
-        'databases' => array(
-            'label' => 'Databases',
-            'href' => '#',
-            'icon' => 'fa-list',
-            'submenu' => $dbsubmenu
-        ),
+//        'databases' => array(
+//            'label' => 'Databases',
+//            'href' => '#',
+//            'icon' => 'fa-list',
+//            'submenu' => $dbsubmenu
+//        ),
     );
     }
     else return [];

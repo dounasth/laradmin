@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Laravel PHP Framework</title>
+    <title>Activate your account</title>
     <link href="{{Config::get('laradmin::general.asset_path')}}/css/login.css" rel="stylesheet" id="bootstrap-css">
     <style>
         @import url(//fonts.googleapis.com/css?family=Lato:700);

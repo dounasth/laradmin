@@ -7,6 +7,9 @@
  */
 
 use Conner\Tagging\Tag;
+use Bonweb\Laradmin\Page;
+use \Bonweb\Laracart\Product;
+use \Bonweb\Laracart\Category;
 
 class LaradminDashboardController extends \LaradminBaseController {
 
@@ -17,7 +20,31 @@ class LaradminDashboardController extends \LaradminBaseController {
             $v->prepare();
             $widgets[$k] = $v->html();
         }
+
         return View::make('laradmin::dashboard')->withWidgets($widgets);
+    }
+
+    public function search() {
+        $q = Input::get('q', '');
+        $search = [];
+        if (fn_is_not_empty($q)) {
+            $search['pages'] = [
+                'title' => 'Pages',
+                'template' => 'laradmin::search.parts.page',
+                'items' => Page::search($q)->get()
+            ];
+            $search['products'] = [
+                'title' => 'Products',
+                'template' => 'laradmin::search.parts.product',
+                'items' => Product::search($q)->get()
+            ];
+            $search['categories'] = [
+                'title' => 'Categories',
+                'template' => 'laradmin::search.parts.category',
+                'items' => Category::search($q)->get()
+            ];
+        }
+        return View::make('laradmin::search.admin-search', compact('search'));
     }
 
     public function tags() {
