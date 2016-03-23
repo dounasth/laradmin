@@ -1,127 +1,87 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html class="bg-black">
 <head>
     <meta charset="UTF-8">
-    <title>{{ trans('laradmin::page_titles.registration') }}</title>
-    <link href="{{Config::get('laradmin::general.asset_path')}}/css/login.css" rel="stylesheet" id="bootstrap-css">
-    <style>
-        @import url(//fonts.googleapis.com/css?family=Lato:700);
+    <title>{{Config::get('laradmin::site.name')}} | Register</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!-- bootstrap 3.0.2 -->
+    <link href="{{Config::get('laradmin::general.asset_path')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- font Awesome -->
+    <link href="{{Config::get('laradmin::general.asset_path')}}/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Theme style -->
+    <link href="{{Config::get('laradmin::general.asset_path')}}/css/AdminLTE.css" rel="stylesheet" type="text/css" />
 
-        body {
-            margin:0;
-            font-family:'Lato', sans-serif;
-            text-align:center;
-            color: #999;
-        }
-
-        .form-signin
-        {
-            max-width: 330px;
-            padding: 15px;
-            margin: 0 auto;
-        }
-        .form-signin .form-signin-heading, .form-signin .checkbox
-        {
-            margin-bottom: 10px;
-        }
-        .form-signin .checkbox
-        {
-            font-weight: normal;
-        }
-        .form-signin .form-control
-        {
-            position: relative;
-            font-size: 16px;
-            height: auto;
-            padding: 10px;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-        .form-signin .form-control:focus
-        {
-            z-index: 2;
-        }
-        .form-signin input[type="text"]
-        {
-            margin-bottom: -1px;
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-        .form-signin input[type="password"]
-        {
-            margin-bottom: 10px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
-        .account-wall
-        {
-            margin-top: 20px;
-            padding: 40px 0px 20px 0px;
-            background-color: #f7f7f7;
-            -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-            -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-        }
-        .login-title
-        {
-            color: #555;
-            font-size: 18px;
-            font-weight: 400;
-            display: block;
-        }
-        .profile-img
-        {
-            width: 96px;
-            height: 96px;
-            margin: 0 auto 10px;
-            display: block;
-            -moz-border-radius: 50%;
-            -webkit-border-radius: 50%;
-            border-radius: 50%;
-        }
-        .need-help
-        {
-            margin-top: 10px;
-        }
-        .new-account
-        {
-            display: block;
-            margin-top: 10px;
-        }
-
-    </style>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
 </head>
-<body>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <h1 class="text-center login-title">{{ trans('laradmin::generic.register_an_account') }}</h1>
-            <div class="account-wall">
-                <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
-                     alt="">
-                {{ Form::open(array('route' => 'register', 'method' => 'post', 'class'=>'form-signin')) }}
-                    {{ Form::text('user[email]', '', array('placeholder'=>'E-mail', 'class'=>'form-control', 'required'=>'', 'autofocus'=>'')); }}
-                    {{ Form::password('user[password]', array('placeholder'=>'Password', 'class'=>'form-control', 'required'=>'')); }}
-                    {{ Form::text('user[first_name]', '', array('placeholder'=>'First name', 'class'=>'form-control', 'required'=>'', 'autofocus'=>'')); }}
-                    {{ Form::text('user[last_name]', '', array('placeholder'=>'Last name', 'class'=>'form-control', 'required'=>'', 'autofocus'=>'')); }}
+<body class="bg-black">
 
-                    <select class="form-control" name="usergroups[]" size="5" multiple="multiple">
-                        @foreach ($groups as $group)
-                        <option value="{{ $group->name }}">{{ $group->name }}</option>
-                        @endforeach
-                    </select>
+<div class="form-box" id="login-box">
+    <div class="header" style="background-color: #00c0ef !important">Register</div>
 
-                    {{ Form::submit(trans('laradmin::generic.register'), array('class'=>'btn btn-lg btn-primary btn-block')) }}
+    {{ Form::open(array('route' => 'register', 'method' => 'post', 'class'=>'form-signin')) }}
 
-                    <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
-                {{ Form::token() }}
-                {{ Form::close() }}
-            </div>
+
+
+
+
+
+
+
+
+
+    <div class="body bg-gray">
+
+        <div class="form-group">
+            {{ Form::text('user[email]', '', array('placeholder'=>'E-mail', 'class'=>'form-control', 'required'=>'', 'autofocus'=>'')); }}
         </div>
+
+        <div class="form-group">
+            {{ Form::password('user[password]', array('placeholder'=>'Password', 'class'=>'form-control', 'required'=>'')); }}
+        </div>
+
+        <div class="form-group">
+            {{ Form::text('user[first_name]', '', array('placeholder'=>'First name', 'class'=>'form-control', 'required'=>'', 'autofocus'=>'')); }}
+        </div>
+
+        <div class="form-group">
+            {{ Form::text('user[last_name]', '', array('placeholder'=>'Last name', 'class'=>'form-control', 'required'=>'', 'autofocus'=>'')); }}
+        </div>
+
+        <div class="form-group">
+            <label>{{ Form::checkbox('remember-me', true); }} Remember me</label>
+        </div>
+
+        <div class="form-group">
+            <select class="form-control" name="usergroups[]" size="5" multiple="multiple">
+                @foreach ($groups as $group)
+                    <option value="{{ $group->name }}" {{ ($group->name=='User' ? 'selected' : '' )  }}>{{ $group->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
     </div>
+    <div class="footer">
+        {{ Form::submit(trans('laradmin::generic.register'), array('class'=>'btn bg-info btn-block')) }}
+    </div>
+    {{ Form::token() }}
+    {{ Form::close() }}
+
+    @if ( class_exists( 'Atticmedia\Anvard\Anvard' ) )
+        {{$socialButtons}}
+    @endif
+
 </div>
+
+
+<!-- jQuery 2.0.2 -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+
 </body>
 </html>
-
-

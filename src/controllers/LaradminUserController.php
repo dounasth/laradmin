@@ -208,8 +208,10 @@ class LaradminUserController extends \LaradminBaseController {
                 unset($groups[$k]);
             }
         }
+
         return View::make('laradmin::register')
-                    ->withGroups($groups);
+                ->withGroups($groups)
+                ->with('socialButtons', \Bonweb\Laradmin\Util::socialButtons());
     }
 
     public function activate() {
@@ -312,16 +314,7 @@ class LaradminUserController extends \LaradminBaseController {
             return Redirect::route('login')->withMessage($message);
         }
 
-        $socialButtons = '';
-        if (class_exists( 'Atticmedia\Anvard\Anvard' )) {
-//            $request = Request::create(Config::get('anvard::routes.index'), 'GET');
-//            $socialButtons = Route::dispatch($request)->getContent();
-            $anvard = App::make('anvard');
-            $providers = $anvard->getProviders();
-            $socialButtons = View::make('laradmin::social-buttons', compact('providers'))->render();
-        }
-
-        return View::make('laradmin::login')->with('socialButtons', $socialButtons);
+        return View::make('laradmin::login')->with('socialButtons', \Bonweb\Laradmin\Util::socialButtons());
     }
 
     public function resetPassword($id) {
@@ -418,6 +411,10 @@ class LaradminUserController extends \LaradminBaseController {
     public function logout() {
         Auth::logout();
         return Redirect::to('/');
+    }
+
+    public function account() {
+        return View::make('laradmin::site.user.account');
     }
 
 }

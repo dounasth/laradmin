@@ -1,7 +1,7 @@
 @extends('laradmin::site.site-layout')
 
 @section('page-title')
-Γυναικεια Ανδρικά και Παιδικά Παπούτσια για όλες τις περιστάσεις - {{Config::get('laradmin::site.name')}}
+{{Config::get('laradmin::site.name')}}
 @stop
 
 @section('page-subtitle')
@@ -10,18 +10,21 @@
 @section('styles')
 @stop
 
+@section('scripts')
+@stop
+
 @section('content')
 
 
-<div class="container main-container headerOffset">
+<div class="container headerOffset">
 
     @var $slides = Banner::whereType("home-slider")->whereStatus(1)->take(5)->get()
-    @if (fn_is_not_empty($slides))
+    @if (false && fn_is_not_empty($slides))
     <div class="row">
         <div class=" image-show-case-wrapper center-block relative col-lg-12">
             <div id="imageShowCase" class="owl-carousel owl-theme">
                 @foreach ($slides as $slide)
-                <div class="product-slide"> 
+                <div class="product-slide">
                     <div class="box-content-overly box-content-overly-white">
                         <div class="box-text-table">
                             <div class="box-text-cell ">
@@ -41,12 +44,13 @@
         </div>
     </div>
     <div style="clear:both"></div>
-    @endif
     <div class="row">
         <div class="col-lg-12">
             <hr class="hr3">
         </div>
     </div>
+    @endif
+
     @var $sliderBanners = Banner::whereType("home-slider-below")->whereStatus(1)->take(6)->get()
     @if (fn_is_not_empty($sliderBanners))
     <div class="row featuredPostContainer ">
@@ -85,7 +89,7 @@
 <div class="container">
 
     <div class="row featuredPostContainer style2">
-        <h3 class="section-title style2 text-center"><span>ΝΕΑ ΠΑΠΟΥΤΣΙΑ</span></h3>
+        <h3 class="section-title style2 text-center"><span>ΝΕΑ ΠΡΟΙΟΝΤΑ</span></h3>
 
         <div id="productslider" class="owl-carousel owl-theme">
             @foreach (Bonweb\Laracart\Product::recent()->take(12)->get() as $recentProduct)
@@ -101,7 +105,7 @@
 
 @var $parallax1 = Banner::whereType("parallax-image-1")->whereStatus(1)->first()
 @if (fn_is_not_empty($parallax1))
-<div class="parallax-section parallax-image" style="background: url('{{ route('banner.image', [$parallax1->id]) }}') fixed;">
+<div class="parallax-section parallax-image" style="background: url('{{ route('banner.image', [$parallax1->id]) }}') fixed no-repeat center center;">
     <div class="container">
         <div class="row ">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -123,7 +127,7 @@
 <div class="container ">
 
 @if (false)
-<div class="morePost row featuredPostContainer style2 globalPaddingTop ">
+<div class="morePost row featuredPostContainer style2 headerOffset ">
     <h3 class="section-title style2 text-center"><span>FEATURES PRODUCT</span></h3>
     <div class="container">
         <div class="row xsResponse">
@@ -183,7 +187,7 @@
 
 @var $parallax2 = Banner::whereType("parallax-image-2")->whereStatus(1)->first()
 @if (fn_is_not_empty($parallax2))
-<div class="parallax-section parallax-image" style="background: url(data:image/png;base64,{{$parallax2->image}}) fixed;">
+<div class="parallax-section parallax-image" style="background: url('{{ route('banner.image', [$parallax2->id]) }}') fixed no-repeat center center;">
     <div class="container">
         <div class="row ">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -213,7 +217,7 @@
 </div>
 
 
-<div class="container marketing">
-    @include('laracart::site.tag-cloud', ['count_from'=>100])
-</div>
+{{--<div class="container marketing">--}}
+    {{--@include('laracart::site.tag-cloud', ['count_from'=>100])--}}
+{{--</div>--}}
 @stop

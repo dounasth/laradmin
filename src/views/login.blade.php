@@ -2,7 +2,7 @@
 <html class="bg-black">
 <head>
     <meta charset="UTF-8">
-    <title>AdminLTE | Log in</title>
+    <title>{{Config::get('laradmin::site.name')}} | Log in</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
     <link href="{{Config::get('laradmin::general.asset_path')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -38,7 +38,7 @@
     <div class="footer">
         {{ Form::submit('Sign in', array('class'=>'btn bg-info btn-block')) }}
         <p><a href="#">I forgot my password</a></p>
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
     </div>
     {{ Form::token() }}
     {{ Form::close() }}

@@ -22,6 +22,32 @@ Route::group(array('before' => '', 'after' => 'cache'), function() {
     {
         return View::make('laradmin::site.home');
     }));
+
+    Route::get('/f', array('as'=>'search', function()
+    {
+        $q = Input::get('q', '');
+        $search = [];
+        if (fn_is_not_empty($q)) {
+//            $search['pages'] = [
+//                'title' => 'Pages',
+//                'template' => 'laradmin::site.search.parts.page',
+//                'items' => \Bonweb\Laradmin\Page::search($q)->get()
+//            ];
+            $search['products'] = [
+                'title' => 'Products',
+                'template' => 'laradmin::site.search.parts.product',
+                'items' => \Bonweb\Laracart\Product::search($q)->with('seo', 'photos', 'affiliateUrl', 'prices', 'metas', 'imported', 'imported.merchant')->paginate(24)
+            ];
+            $search['categories'] = [
+                'title' => 'Categories',
+                'template' => 'laradmin::site.search.parts.category',
+                'items' => \Bonweb\Laracart\Category::search($q)->get()
+            ];
+        }
+
+        return View::make('laradmin::site.search.search', compact('search'));
+    }));
+
     Route::any('login', array('as' => 'login', 'uses' => 'LaradminUserController@login'));
     Route::any('register', array('as' => 'register', 'uses' => 'LaradminUserController@register'));
     Route::any('activate', array('as' => 'activate', 'uses' => 'LaradminUserController@activate'));
@@ -40,6 +66,10 @@ Route::group(array('before' => '', 'after' => 'cache'), function() {
 
     Route::get('/sitemap-index.xml', array('as' => 'site.sitemap.index', 'uses' => 'LaradminSitemapsController@index'));
     Route::get('/sitemap-pages.xml', array('as' => 'site.sitemap.pages', 'uses' => 'LaradminSitemapsController@pages'));
+});
+
+Route::group(array('before' => 'auth', 'after' => '', 'prefix' => 'user'), function() {
+    Route::any('account', array('as' => 'site.user.account', 'uses' => 'LaradminUserController@account'));
 });
 
 Route::group(array('before' => 'auth|auth.admin|init.admin', 'after' => '', 'prefix' => 'admin'), function() {

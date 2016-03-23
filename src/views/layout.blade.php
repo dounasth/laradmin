@@ -232,7 +232,7 @@
 </li>
 <!-- User Account: style can be found in dropdown.less -->
 <li class="dropdown user user-menu">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <a href="" class="dropdown-toggle" data-toggle="dropdown">
         <i class="glyphicon glyphicon-user"></i>
         <i class="caret"></i></span>
     </a>
@@ -246,7 +246,6 @@
             </p>
         </li>
         <!-- Menu Body -->
-        {{--
         <li class="user-body">
             <div class="col-xs-4 text-center">
                 <a href="#">Followers</a>
@@ -258,7 +257,6 @@
                 <a href="#">Friends</a>
             </div>
         </li>
-        --}}
         <!-- Menu Footer-->
         <li class="user-footer">
             <div class="pull-left">
@@ -366,7 +364,7 @@
 
 
 <!-- jQuery 2.0.2 -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{ Config::get('laradmin::general.asset_path') }}/js/bootstrap.min.js" type="text/javascript"></script>
 <!-- AdminLTE App -->

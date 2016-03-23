@@ -2,7 +2,7 @@
 
 <div class="margin-top text-center">
     <br/>
-    <h4 class="">Or sign in using social networks</h4>
+    <h4 class="">Or signin/register using social networks</h4>
     <br/>
     @foreach ($providers as $provider)
     @var $provider_lowercase = ($provider == 'Google') ? 'google-plus' : strtolower($provider)

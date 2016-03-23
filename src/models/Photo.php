@@ -26,7 +26,7 @@ class Photo extends \Eloquent {
     public function photon($size) {
         $url = $this->httpPath();
         $url = str_ireplace(['http://', 'https://'], '', $url);
-        return "http://i0.wp.com/$url?fit=$size,$size";
+        return "//i0.wp.com/$url?fit=$size,$size";
     }
 
 }

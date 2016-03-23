@@ -28,4 +28,16 @@ class Util {
         else return false;
     }
 
+    public static function socialButtons() {
+        $socialButtons = '';
+        if (class_exists( 'Atticmedia\Anvard\Anvard' )) {
+//            $request = Request::create(Config::get('anvard::routes.index'), 'GET');
+//            $socialButtons = Route::dispatch($request)->getContent();
+            $anvard = \App::make('anvard');
+            $providers = $anvard->getProviders();
+            $socialButtons = \View::make('laradmin::social-buttons', compact('providers'))->render();
+        }
+        return $socialButtons;
+    }
+
 }

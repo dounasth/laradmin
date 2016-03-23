@@ -32,7 +32,9 @@ class LaradminSitemapsController extends \LaradminBaseController
             Sitemap::addTag(route('site.pages.view', $page->slug), $page->created_at, 'daily', '0.8');
         }
 
-        return Sitemap::xml();
+        $response = Response::make(Sitemap::xml(), 200);
+        $response->header('Content-Type', 'text/xml');
+        return $response;
     }
 
 }
